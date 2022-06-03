@@ -1,0 +1,8 @@
+*.iml
+.idea/
+target/
+*.class
+*.jar
+*.war
+src/main/resources/logs.txt
+application.properties
