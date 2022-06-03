@@ -1,4 +1,4 @@
-package com.Utils;
+package com.utils;
 
 import java.io.FileReader;
 import java.io.IOException;

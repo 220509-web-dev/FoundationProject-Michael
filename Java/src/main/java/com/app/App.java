@@ -1,10 +1,8 @@
-package com.App;
+package com.app;
 
-import com.DAO.UserDAO;
-import com.DAO.UserDaoPostgres;
+import com.dao.UserDAO;
+import com.dao.UserDaoPostgres;
 import com.models.User;
-
-import java.util.List;
 
 public class App {
     public static void main(String[] args) {

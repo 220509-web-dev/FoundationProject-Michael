@@ -1,9 +1,8 @@
-package com.DAO;
+package com.dao;
 
-import com.Utils.ConnectionUtil;
+import com.utils.ConnectionUtil;
 import com.models.User;
 
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
