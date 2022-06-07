@@ -1,0 +1,34 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <display-name>Michael's Foundations Project</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <context-param>
+        <param-name>test-context-key</param-name>
+        <param-value>test-context-value</param-value>
+    </context-param>
+
+<!--    <servlet>-->
+<!--        <servlet-name>TestServlet</servlet-name>-->
+<!--        <servlet-class>com.servlets.TestServlet</servlet-class>-->
+<!--    </servlet>-->
+
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>TestServlet</servlet-name>-->
+<!--        <url-pattern>/test</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+<!--TestServlet -->
+
+    <listener>
+        <listener-class>com.utils.ContextLoaderListener</listener-class>
+    </listener>
+
+</web-app>
