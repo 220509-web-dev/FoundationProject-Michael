@@ -46,7 +46,7 @@ public class UserServlet extends HttpServlet {
             return;
         }
 
-        // if we make it here, then the request isnt for a user by id or username - just get all users
+        // if we make it here, then the request isn't for a user by id or username - just get all users
 
         // search DB for all users and return
 
@@ -59,7 +59,7 @@ public class UserServlet extends HttpServlet {
         System.out.println("[LOG] - UserServlet received a POST request at " + LocalDateTime.now());
 
         try {
-            //AppUser newUser = mapper.readValue(req.getInputStream(), AppUser.class);
+            // AppUser newUser = mapper.readValue(req.getInputStream(), AppUser.class);
             //System.out.println(newUser);
         } catch (Exception e) {
             e.printStackTrace();

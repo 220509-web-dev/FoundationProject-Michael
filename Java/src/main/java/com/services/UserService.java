@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+// ToDO make service methods: getAll, getById, getByUsername, authenticate(username, password), createNewUser
 
 public class UserService extends HttpServlet {
 
@@ -16,7 +17,7 @@ public class UserService extends HttpServlet {
     public UserService(ObjectMapper mapper) {
         this.mapper = mapper;
     }
-    // ToDO make service methods: getAll, getById, getByUsername, authenticate(username, password), createNewUser
+
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,6 +28,7 @@ public class UserService extends HttpServlet {
         }
 
         resp.setStatus(204);
+        return;
 
     }
 
