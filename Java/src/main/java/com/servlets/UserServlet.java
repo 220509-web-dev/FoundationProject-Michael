@@ -76,7 +76,9 @@ public class UserServlet extends HttpServlet {
             }
             resp.setStatus(200);
             resp.getWriter().write("Service layer found the record " + user);
-
+            resp.setStatus(200);
+            resp.setContentType("application/json");
+            resp.getWriter().write(mapper.writeValueAsString(user));
             return;
         }
 
@@ -129,6 +131,26 @@ public class UserServlet extends HttpServlet {
         super.doDelete(req, resp);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

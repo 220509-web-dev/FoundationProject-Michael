@@ -7,9 +7,9 @@ import com.models.User;
 
 public class AuthService {
 
-    private final UserService userService;
+    private final com.services.userService userService;
 
-    public AuthService(UserService userService) {
+    public AuthService(com.services.userService userService) {
         this.userService = userService;
     }
 

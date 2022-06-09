@@ -33,10 +33,10 @@ public class UserDaoPostgres implements UserDAO {
             int generatedID = rs.getInt("id");
 
             user.setId(generatedID);
-            return user;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return user;
     }
 
     @Override

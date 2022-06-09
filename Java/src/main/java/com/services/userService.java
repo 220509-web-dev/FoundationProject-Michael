@@ -1,7 +1,9 @@
 package com.services;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.dao.UserDAO;
 import com.models.User;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,15 +13,33 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
+class UserService {
+    private final UserDAO userDAO;
+    private String logString;
 
+    public UserService(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
+    public User getUserByUsername(String user) {
+        return this.userDAO.getUserByUsername(user);
+    }
+
+    public User getUserByID(int id) {
+        return this.userDAO.getUserById(id);
+    }
+
+    public void createNewUser(User newUser) {
+        this.userDAO.createUser(newUser);
+    }
+}
 // ToDO make service methods: getAll, getById, getByUsername, authenticate(username, password), createNewUser
 
-public abstract class UserService extends HttpServlet {
+public abstract class userService extends HttpServlet {
 
     private final ObjectMapper mapper;
 
-    public UserService(ObjectMapper mapper) {
+    public userService(ObjectMapper mapper) {
         this.mapper = mapper;
     }
 
@@ -51,4 +71,3 @@ public abstract class UserService extends HttpServlet {
     public void createNewUser(User userToBeRegistered) {
     }
 }
-
