@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.models.User;
 import com.utils.CustomLogger;
 import com.utils.LogLevel;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +25,7 @@ public class UserServlet extends HttpServlet {
 
     private final ObjectMapper mapper;
     private final UserDAO userDAO;
+    private String logString;
 
     public UserServlet(ObjectMapper mapper, UserDAO userDAO) {
         this.mapper = mapper;
@@ -115,16 +117,31 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        System.out.println("[LOG] - UserServlet received a POST request at " + LocalDateTime.now());
+        Object logString = "UserServlet received a post request at - " + LocalDateTime.now();
+        CustomLogger.log((String) logString, LogLevel.INFO);
 
         try {
-            // AppUser newUser = mapper.readValue(req.getInputStream(), AppUser.class);
-            //System.out.println(newUser);
+            List<User> users = userDAO.getAllUsers();
+            User newUser = mapper.readValue(req.getInputStream(), User.class);
+            for (User user : users) {
+                if (newUser.getUsername().equals(user.getUsername())) {
+                    logString = "Username taken, please insert a different username - " + LocalDateTime.now();
+                    CustomLogger.log((String) logString, LogLevel.ERROR);
+
+                    System.err.println("[ERROR] - Username taken, please insert a different username.");
+                } else {
+                    userDAO.createUser(newUser);
+                }
+            }
+
+
         } catch (Exception e) {
+            logString = String.format("An error occurred while creating a User. More Information: %s", ExceptionUtils.getStackTrace(e));
+            CustomLogger.log((String) logString, LogLevel.INFO);
             e.printStackTrace();
         }
         resp.setStatus(204);
+
 
     }
 
