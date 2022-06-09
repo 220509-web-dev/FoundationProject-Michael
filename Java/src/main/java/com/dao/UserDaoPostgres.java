@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoPostgres implements UserDAO {
-    private String logstring;
 
     @Override
     public User createUser(User user) {
@@ -42,8 +41,9 @@ public class UserDaoPostgres implements UserDAO {
 
     @Override
     public User getUserByUsername(String username) {
+        String logstring;
         try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
-            logstring="Attempting to get user by username - ";
+            logstring ="Attempting to get user by username - ";
             CustomLogger.log(logstring, LogLevel.INFO);
 
             String sql = "select * from foundation_project_app.app_users where username = ?";

@@ -23,10 +23,8 @@ public class ContextLoaderListener implements ServletContextListener {
         TestServlet testServlet = new TestServlet(mapper, userDAO);
         context.addServlet("TestServlet", testServlet).addMapping("/test");
 
-        UserServlet userServlet = new UserServlet(mapper,userDAO);
+        UserServlet userServlet = new UserServlet(mapper, userDAO);
         context.addServlet("UserServlet", userServlet).addMapping("/users/*");
-
-
 
     }
 
@@ -34,4 +32,8 @@ public class ContextLoaderListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {
         ServletContextListener.super.contextDestroyed(sce);
     }
+
 }
+
+
+
