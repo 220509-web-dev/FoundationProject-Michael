@@ -75,8 +75,6 @@ public class UserServlet extends HttpServlet {
                 return;
             }
             resp.setStatus(200);
-            resp.getWriter().write("Service layer found the record " + user);
-            resp.setStatus(200);
             resp.setContentType("application/json");
             resp.getWriter().write(mapper.writeValueAsString(user));
             return;
