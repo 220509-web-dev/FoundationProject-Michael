@@ -92,6 +92,7 @@ public class UserServlet extends HttpServlet {
 
             //Get user by Username
             String username = req.getParameter("username");
+            resp.getWriter().write("no user found with provided username");
 
             try {
                 int userId = Integer.parseInt(req.getParameter("id"));
