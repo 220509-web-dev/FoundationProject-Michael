@@ -5,6 +5,8 @@ import com.exceptions.NoUserFoundException;
 import com.exceptions.OutOfBoundsException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.models.User;
+import com.utils.CustomLogger;
+import com.utils.LogLevel;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +16,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.services.GetAllUsers.GetAllUsersRequest;
 import static com.services.GetUserById.getbyId;
 
 public class UserServlet extends HttpServlet {
@@ -80,29 +82,36 @@ public class UserServlet extends HttpServlet {
             return;
         }
 
-        if (potentialUsername != null) {
-            // search the DB for user with given username
-            resp.getWriter().write("Sent request to service layer for getUserByUsername, value entered: " + potentialUsername);
-            return;
+
+        Object logString = "UserServlet received a get request at - " + LocalDateTime.now();
+            CustomLogger.log((String) logString, LogLevel.INFO);
+            List<User> userList = userDAO.getAllUsers();
+            System.out.println("This is the request " + req);
+
+            //Get user by Username
+            String username = req.getParameter("username");
+
+            try {
+                int userId = Integer.parseInt(req.getParameter("id"));
+                userList = userList.stream().filter(user -> user.getId() == userId).collect(Collectors.toList());
+
+            } catch (NumberFormatException e) {
+                logString = "Null or invalid ID input";
+                CustomLogger.log((String) logString, LogLevel.ERROR);
+            }
+
+            // filter userList based on username
+            if (username != null) {
+                userList = userList.stream().filter(user -> user.getUsername().equals(username)).collect(Collectors.toList());
+            }
+
+            // set response
+            String result = mapper.writeValueAsString(userList);
+            resp.setContentType("application/json");
+            resp.getWriter().write(result);
+
         }
-        System.out.println("The service method for getAllUsers was invoked");
-        List<User> users;
-        try {
-            users = GetAllUsersRequest(userDAO);
-        } catch (Exception e) {
-            resp.getWriter().write("A database error occurred!");
-            resp.setStatus(400);
-            return;
-        }
-        resp.setStatus(200);
-        resp.setContentType("application/json");
-        resp.getWriter().write(mapper.writeValueAsString(users));
-        // if we make it here, then the request isn't for a user by id or username - just get all users
 
-        // search DB for all users and return
-
-
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -129,6 +138,30 @@ public class UserServlet extends HttpServlet {
         super.doDelete(req, resp);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
