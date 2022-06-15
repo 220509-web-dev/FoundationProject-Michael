@@ -1,4 +1,4 @@
-package com.servlets;
+package com.exceptions.servlets;
 
 import com.dao.UserDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;

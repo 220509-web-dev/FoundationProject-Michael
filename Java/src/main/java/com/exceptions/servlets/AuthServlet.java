@@ -1,4 +1,4 @@
-package com.servlets;
+package com.exceptions.servlets;
 
 import com.dao.UserDAO;
 import com.dao.UserDaoPostgres;
@@ -23,7 +23,7 @@ public class AuthServlet extends HttpServlet {
     private final ObjectMapper mapper;
     private String logString;
 
-    public AuthServlet(ObjectMapper mapper) {
+    public AuthServlet(ObjectMapper mapper, UserDAO userDAO) {
         this.mapper = mapper;
     }
 

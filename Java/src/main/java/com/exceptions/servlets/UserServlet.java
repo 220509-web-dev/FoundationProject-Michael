@@ -1,4 +1,4 @@
-package com.servlets;
+package com.exceptions.servlets;
 
 import com.dao.UserDAO;
 import com.exceptions.NoUserFoundException;
@@ -86,34 +86,34 @@ public class UserServlet extends HttpServlet {
 
 
         Object logString = "UserServlet received a get request at - " + LocalDateTime.now();
-            CustomLogger.log((String) logString, LogLevel.INFO);
-            List<User> userList = userDAO.getAllUsers();
-            System.out.println("This is the request " + req);
+        CustomLogger.log((String) logString, LogLevel.INFO);
+        List<User> userList = userDAO.getAllUsers();
+        System.out.println("This is the request " + req);
 
-            //Get user by Username
-            String username = req.getParameter("username");
-            resp.getWriter().write("no user found with provided username");
+        //Get user by Username
+        String username = req.getParameter("username");
 
-            try {
-                int userId = Integer.parseInt(req.getParameter("id"));
-                userList = userList.stream().filter(user -> user.getId() == userId).collect(Collectors.toList());
 
-            } catch (NumberFormatException e) {
-                logString = "Null or invalid ID input";
-                CustomLogger.log((String) logString, LogLevel.ERROR);
-            }
+        try {
+            int userId = Integer.parseInt(req.getParameter("id"));
+            userList = userList.stream().filter(user -> user.getId() == userId).collect(Collectors.toList());
 
-            // filter userList based on username
-            if (username != null) {
-                userList = userList.stream().filter(user -> user.getUsername().equals(username)).collect(Collectors.toList());
-            }
-
-            // set response
-            String result = mapper.writeValueAsString(userList);
-            resp.setContentType("application/json");
-            resp.getWriter().write(result);
-
+        } catch (NumberFormatException e) {
+            logString = "Null or invalid ID input";
+            CustomLogger.log((String) logString, LogLevel.ERROR);
         }
+
+        // filter userList based on username
+        if (username != null) {
+            userList = userList.stream().filter(user -> user.getUsername().equals(username)).collect(Collectors.toList());
+        }
+
+        // set response
+        String result = mapper.writeValueAsString(userList);
+        resp.setContentType("application/json");
+        resp.getWriter().write(result);
+
+    }
 
 
     @Override
@@ -156,6 +156,141 @@ public class UserServlet extends HttpServlet {
         super.doDelete(req, resp);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

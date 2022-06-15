@@ -2,9 +2,10 @@ package com.utils;
 
 import com.dao.UserDAO;
 import com.dao.UserDaoPostgres;
+import com.exceptions.servlets.AuthServlet;
+import com.exceptions.servlets.TestServlet;
+import com.exceptions.servlets.UserServlet;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.servlets.TestServlet;
-import com.servlets.UserServlet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -25,6 +26,10 @@ public class ContextLoaderListener implements ServletContextListener {
 
         UserServlet userServlet = new UserServlet(mapper, userDAO);
         context.addServlet("UserServlet", userServlet).addMapping("/users/*");
+
+        AuthServlet authServlet = new AuthServlet(mapper, userDAO);
+        context.addServlet("AuthServlet", authServlet).addMapping("/auth/login");
+
 
     }
 
