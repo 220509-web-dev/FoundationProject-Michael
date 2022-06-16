@@ -35,7 +35,7 @@ public class AuthServlet extends HttpServlet {
             session.invalidate();
         }
 
-        resp.setStatus(204);
+        resp.setStatus(200);
 
     }
 
@@ -68,7 +68,7 @@ public class AuthServlet extends HttpServlet {
                 HttpSession session = req.getSession();
                 session.setAttribute("auth-user", user);
 
-                resp.setStatus(204);
+                resp.setStatus(200);
                 return;
             }
         }
@@ -77,11 +77,11 @@ public class AuthServlet extends HttpServlet {
         resp.setContentType("application/json");
 
         HashMap<String, Object> errorMessage = new HashMap<>();
-        errorMessage.put("code", 400);
-        errorMessage.put("message", "No user found with provided credentials");
+        errorMessage.put("code", 200);
+        errorMessage.put("message", "No user found with the provided data");
         errorMessage.put("timestamp", LocalDateTime.now().toString());
 
-        logString = "No user found with provided credentials - " + LocalDateTime.now();
+        logString = "No user found with the provided data - " + LocalDateTime.now();
         CustomLogger.log(logString, LogLevel.ERROR);
         CustomLogger.parser();
 

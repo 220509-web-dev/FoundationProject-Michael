@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -78,7 +79,9 @@ public class UserServlet extends HttpServlet {
                 resp.setStatus(400);
                 return;
             }
-            resp.setStatus(200);
+            HashMap<String, Object> errorMessage = new HashMap<>();
+            errorMessage.put("code", 200);
+            errorMessage.put("message", "No user found with the provided data");
             resp.setContentType("application/json");
             resp.getWriter().write(mapper.writeValueAsString(user));
             return;
@@ -92,6 +95,9 @@ public class UserServlet extends HttpServlet {
 
         //Get user by Username
         String username = req.getParameter("username");
+        HashMap<String, Object> errorMessage = new HashMap<>();
+        errorMessage.put("code", 200);
+        errorMessage.put("message", "No user found with the provided data");
 
 
         try {
@@ -141,7 +147,7 @@ public class UserServlet extends HttpServlet {
             CustomLogger.log((String) logString, LogLevel.INFO);
             e.printStackTrace();
         }
-        resp.setStatus(204);
+        resp.setStatus(200);
 
 
     }

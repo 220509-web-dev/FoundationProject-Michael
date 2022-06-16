@@ -23,7 +23,7 @@ public class ConnectionFactory {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (Exception e) {
-            System.err.println("Failed to load PostgreSQL Driver");
+            System.err.println("Failed to load PostgresSQL Driver");
             throw new RuntimeException(e); // fail fast
         }
     }

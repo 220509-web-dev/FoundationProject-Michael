@@ -51,7 +51,7 @@ public abstract class userService extends HttpServlet {
             session.invalidate();
         }
 
-        resp.setStatus(204);
+        resp.setStatus(200);
         return;
 
     }
