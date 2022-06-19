@@ -57,6 +57,7 @@ public class AuthServlet extends HttpServlet {
         String providedUsername = (String) credentials.get("username");
         String providedPassword = (String) credentials.get("password");
 
+
         for (User user : users) {
             if (providedUsername.equals(user.getUsername()) && providedPassword.equals(user.getPassword())) {
                 System.out.println("[LOG] - found user!");
@@ -68,7 +69,7 @@ public class AuthServlet extends HttpServlet {
                 HttpSession session = req.getSession();
                 session.setAttribute("auth-user", user);
 
-                resp.setStatus(200);
+                resp.setStatus(204);
                 return;
             }
         }
@@ -93,3 +94,4 @@ public class AuthServlet extends HttpServlet {
 
 
 }
+

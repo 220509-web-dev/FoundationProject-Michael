@@ -13,12 +13,13 @@ public class AuthService {
         this.userService = userService;
     }
 
-    public void register(User userToBeRegistered) {
+    public User register(User userToBeRegistered) {
         if (userService.getUserByUsername(userToBeRegistered.getUsername()) != null) {
             throw new UsernameNotAvailableException("Username is already taken");
         }
 
         userService.createNewUser(userToBeRegistered);
+        return userToBeRegistered;
     }
 
     public User login(String username, String password) {
@@ -36,6 +37,11 @@ public class AuthService {
             System.out.println("User Does Not Exist!");
             throw new InvalidCredentialsException("User Does Not Exist!");
         }
+    }
+
+
+    public User AuthService(String providedUsername, String providedPassword) {
+        return null;
     }
 }
 

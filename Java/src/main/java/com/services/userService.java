@@ -43,6 +43,11 @@ public abstract class userService extends HttpServlet {
         this.mapper = mapper;
     }
 
+    public static User AuthService(String providedUsername, String providedPassword) {
+        return null;
+    }
+
+
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
